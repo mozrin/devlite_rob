@@ -8,11 +8,24 @@
 # set -eux
 # export postCreateCommand=true
 
+##### User Modifiable Options
+
+export NODEJS_INSTALLATION=true
+export NODEJS_VERSION=current
+
+export PYTHON_INSTALLATION=true
+export PYTHON_VERSION=3.12
+
+export PHP_INSTALLATION=false
+export PHP_VERSION=8.3
+
 ##### Install OS Package Updates
 
 apt update
 
 ##### Install Utilities
+
+echo "Installing System Utilities ..."
 
 apt install -y \
     iputils-ping \
@@ -20,10 +33,18 @@ apt install -y \
     g++ \
     make
 
-##### Conditional PHP Installation
+##### Conditional Python3 Installation
 
-export PHP_INSTALLATION=false
-export PHP_VERSION=8.3
+if [ "$PYTHON_INSTALLATION" = "true" ]; then
+    echo "Installing Python $PYTHON_VERSION ..."
+
+    apt-get update
+    apt-get install -y python${PYTHON_VERSION} python${PYTHON_VERSION}-venv python${PYTHON_VERSION}-dev
+else
+    echo "Python installation skipped."
+fi
+
+##### Conditional PHP Installation
 
 if [ "$PHP_INSTALLATION" = "true" ]; then
     echo "Installing PHP $PHP_VERSION and Composer..."
@@ -55,19 +76,43 @@ else
     echo "PHP installation skipped."
 fi
 
-##### Install Node
+##### Conditional Node.js Installation
 
-############### REMOVED: Installed via feature {} for now.
+if [ "$NODEJS_INSTALLATION" = "true" ]; then
+    echo "Installing Node.js $NODEJS_VERSION ..."
 
-# NODE_VERSION=current
-
-# curl -fsSL "https://deb.nodesource.com/setup_${NODE_VERSION}.x" | sudo -E bash -
-# sudo apt-get install -y nodejs
-
-##### Install Firebase and GCP CLI
-
-npm install -g firebase-tools
-gcloud components install beta
-gcloud components update
+    curl -fsSL "https://deb.nodesource.com/setup_${NODEJS_VERSION}.x" | sudo -E bash -
+    sudo apt-get install -y nodejs
+else
+    echo "Node.js installation skipped."
+fi
 
 ##### Add your changes below here. 
+
+##### Install Firebase CLI
+
+echo "Installing firebase-tools ..."
+
+npm install -g firebase-tools
+
+##### Install Google Cloud SDK
+
+## Prepare and Trust the Google SDK in APT
+
+echo "Preparing GCS SDK in APT ..."
+
+apt-get install -y apt-transport-https ca-certificates gnupg curl
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+
+## Installation Process
+
+echo "Installing GCS SDK ..."
+
+apt-get update
+apt-get install -y google-cloud-sdk
+
+## Install Cloud Tools and Environment
+
+gcloud components install beta
+gcloud components update

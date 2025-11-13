@@ -13,7 +13,7 @@ services:
       - ~/.gitconfig:/root/.gitconfig
       - ~/.git-credentials:/root/.git-credentials
     networks:
-      - moztopia_network
+      - regal_network
 
   redis:
     container_name: redis_${COMPOSE_PROJECT_NAME}
@@ -24,7 +24,7 @@ services:
       - ${CONTAINERS_CONFIGDIR}/redis/data:/data:rw
       - ${CONTAINERS_CONFIGDIR}/redis/log:/var/log/redis:rw
     networks:
-      - moztopia_network
+      - regal_network
 
   mariadb:
     container_name: mariadb_${COMPOSE_PROJECT_NAME}
@@ -40,9 +40,9 @@ services:
       - MYSQL_PASSWORD=secret
       - MYSQL_ROOT_PASSWORD=secret
     networks:
-      - moztopia_network
+      - regal_network
 
 networks:
-  moztopia_network:
-    name: moztopia_network
+  regal_network:
+    name: regal_network
     driver: bridge

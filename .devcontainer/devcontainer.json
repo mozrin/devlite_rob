@@ -20,12 +20,7 @@
     },
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:latest": {},
-        "ghcr.io/devcontainers/features/common-utils:latest": {},
-        "ghcr.io/devcontainers/features/node:1": {
-            "version": "20"
-        },
-        "ghcr.io/devcontainers/features/firebase-cli:1": {},
-        "ghcr.io/devcontainers/features/google-cloud-cli:1": {}
+        "ghcr.io/devcontainers/features/common-utils:latest": {}
     },
     "customizations": {
         "vscode": {
