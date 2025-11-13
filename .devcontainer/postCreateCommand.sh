@@ -20,13 +20,6 @@ apt install -y \
     g++ \
     make
 
-##### Install C Database Client Libraries
-
-apt install -y \
-    libsqlite3-dev \
-    libmariadb-dev \
-    libpq-dev
-
 ##### Conditional PHP Installation
 
 export PHP_INSTALLATION=false
@@ -61,5 +54,20 @@ if [ "$PHP_INSTALLATION" = "true" ]; then
 else
     echo "PHP installation skipped."
 fi
+
+##### Install Node
+
+############### REMOVED: Installed via feature {} for now.
+
+# NODE_VERSION=current
+
+# curl -fsSL "https://deb.nodesource.com/setup_${NODE_VERSION}.x" | sudo -E bash -
+# sudo apt-get install -y nodejs
+
+##### Install Firebase and GCP CLI
+
+npm install -g firebase-tools
+gcloud components install beta
+gcloud components update
 
 ##### Add your changes below here. 
