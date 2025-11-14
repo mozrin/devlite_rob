@@ -46,8 +46,6 @@ if [ "$ABORT_WORKSPACE_NAME" != "$PROJECT_NAME" ]; then
     echo -e ""
     echo -e "\e[1;33mCompleting the instructions takes less than 30 seconds.\e[0m"
 
-    sleep 86400
-
     exit 0
 fi
 
