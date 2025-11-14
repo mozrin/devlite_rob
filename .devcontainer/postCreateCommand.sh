@@ -11,7 +11,7 @@
 ##### User Modifiable Options
 
 export NODEJS_INSTALLATION=true
-export NODEJS_VERSION=current
+export NODEJS_VERSION=24
 
 export PYTHON_INSTALLATION=true
 export PYTHON_VERSION=3.12

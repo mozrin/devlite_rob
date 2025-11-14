@@ -10,6 +10,10 @@ You don’t need to set up your machine manually — the container gives you a c
 
 ## 🚀 Quickstart
 
+```bash
+IMPORTANT - Ignore the Jupyter extensions efforts to get you to load it until after the container is fully installed.
+```
+
 1. **Clone the project from GitHub**
 
    ```bash
@@ -70,7 +74,6 @@ You don’t need to set up your machine manually — the container gives you a c
   - Installs Node.js (for frontend/backend).
   - Installs Firebase CLI (`firebase` command).
   - Installs Google Cloud SDK (`gcloud` command).
-  - Optionally installs PHP + Composer (disabled by default).
 - VS Code connects you directly into this container environment.
 
 ---
